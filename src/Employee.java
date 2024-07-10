@@ -1,5 +1,5 @@
 import java.util.*;
-public class Employee extends Payroll {
+public class Employee {
     public float regularHours;
     private float overtimeHours;
     private float bonus;
@@ -25,12 +25,12 @@ public class Employee extends Payroll {
         System.out.println("Enter employee's deductions: ");
         this.deductions = s.nextFloat();
 
-        System.out.println("Employee's name: " + name + " " +
-                            "Employee's ID: " + ID + " " +
-                            "Employee's hourly salary: " + salary + " " +
-                            "Regular hours worked: " + regularHours + " " +
-                            "Overtime hours worked: " + overtimeHours + " " +
-                            "Bonus: " + bonus + " " +
+        System.out.println("Employee's name: " + name + "\n" +
+                            "Employee's ID: " + ID + "\n" +
+                            "Employee's hourly salary: " + salary + "\n" +
+                            "Regular hours worked: " + regularHours + "\n" +
+                            "Overtime hours worked: " + overtimeHours + "\n" +
+                            "Bonus: " + bonus + "\n" +
                             "Deductions: " + deductions);
                             }
     public float calculateGrossPay() {
@@ -40,15 +40,21 @@ public class Employee extends Payroll {
         return regularPay + overtimePay + bonus;
     }
 
+    public float calculateTaxes(float taxRate) {
+        return calculateGrossPay() * taxRate;
+    }
+
+    public float calculateNetPay(float taxRate) {
+        float grossPay = calculateGrossPay();
+        float taxes = calculateTaxes(taxRate);
+        return grossPay - taxes - deductions;
+    }
+
     public String[] storeEmployeeData() {
-        String[] employeeData = new String[7];
+        String[] employeeData = new String[3];
         employeeData[0] = this.name;
         employeeData[1] = Integer.toString(this.ID);
         employeeData[2] = Float.toString(this.salary);
-        employeeData[3] = Float.toString(this.regularHours);
-        employeeData[4] = Float.toString(this.overtimeHours);
-        employeeData[5] = Float.toString(this.bonus);
-        employeeData[6] = Float.toString(this.deductions);
         return employeeData;
     }
 
